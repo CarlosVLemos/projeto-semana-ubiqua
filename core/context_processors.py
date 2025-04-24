@@ -12,6 +12,29 @@ def menu_items(request):
             "section": "Início",
             "header": True,
         },
+        {
+            "label": "Operação",
+            "icon": "bx bx-home-circle",
+            "section": "Reciclagem",
+            "permission": 'reciclagem.view_unidade',
+            "sub_items": [
+                {
+                    "label": "Iniciar Reciclagem",
+                    "url_name": "reciclagem:ser_recicla_list",
+                    "permission": "reciclagem.view_unidade",
+                },
+                {
+                    "label": "Unidades",
+                    "url_name": "reciclagem:unidade_list",
+                    "permission": "reciclagem.view_unidade",
+                },
+                {
+                    "label": "Tipo de Residuo",
+                    "url_name": "reciclagem:tiporesiduo_list",
+                    "permission": "reciclagem.view_unidade",
+                },
+            ]
+        },
     ]
   
 

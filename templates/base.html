@@ -177,45 +177,6 @@
             </li>
             {% endfor %} {% endfor %}
 
-            <li class="menu-header small text-uppercase">
-              <span class="menu-header-text">Cadastros</span>
-            </li>
-            <li
-              class="menu-item {% if 'unidade' in request.resolver_match.url_name %}active open{% endif %}"
-            >
-              <a href="{% url 'reciclagem:unidade_list' %}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-building"></i>
-                <div class="text-truncate">Unidades</div>
-              </a>
-            </li>
-            <li
-              class="menu-item {% if 'tiporesiduo' in request.resolver_match.url_name %}active open{% endif %}"
-            >
-              <a
-                href="{% url 'reciclagem:tiporesiduo_list' %}"
-                class="menu-link"
-              >
-                <i class="menu-icon tf-icons bx bx-globe"></i>
-                <div class="text-truncate">Tipos de Resíduos</div>
-              </a>
-            </li>
-
-            <li class="menu-header small text-uppercase">
-              <span class="menu-header-text">Reciclagem</span>
-            </li>
-            <li
-              class="menu-item {% if request.resolver_match.namespace == 'reciclagem' %}active open{% endif %}"
-            >
-              <a
-                href="{% url 'reciclagem:ser_recicla_list' %}"
-                class="menu-link"
-              >
-                <i class="menu-icon tf-icons bx bx-recycle"></i>
-                <div class="text-truncate">Serviço Recicla</div>
-              </a>
-            </li>
-          </ul>
-
          
         </aside>
         <!-- / Menu -->

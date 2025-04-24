@@ -3,6 +3,8 @@ from django.contrib.auth.models import AbstractUser, Group, Permission
 
 class User(AbstractUser):
     email = models.EmailField(unique=True)
+    matricula = models.CharField(max_length=20, unique=True, blank=True, null=True)
+    #unidade = models.ForeignKey('reciclagem.Unidade', on_delete=models.CASCADE, related_name='reciclagens')
     groups = models.ManyToManyField(Group, related_name='custom_user_set', blank=True)
     user_permissions = models.ManyToManyField(Permission, related_name='custom_user_set', blank=True)
     
