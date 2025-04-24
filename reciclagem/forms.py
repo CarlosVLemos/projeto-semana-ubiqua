@@ -29,17 +29,20 @@ class UnidadeForm(forms.ModelForm):
             'estado':   'Estado',
         }
 
-'''
-
-class TipoResiduoForm(forms.ModelForm):
+class TipoResiduosForm(forms.ModelForm):
     class Meta:
-        model  = TipoResiduo
+        model  = TipoResiduos
         # só pedimos o nome, o código será slugificado automaticamente
         fields = ['nome']
         widgets = {
-            'nome': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+            'nome': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+        labels = {
+            'nome': 'Nome do material'
         }
 
+
+'''
 class ReciclagemForm(forms.ModelForm):
     class Meta:
         model  = Reciclagem

@@ -23,6 +23,11 @@ def menu_items(request):
                     "url_name": "reciclagem:unidade_list",
                     "permission": "reciclagem.view_unidade",
                 },
+                {
+                    "label": "Tipo Residuos",
+                    "url_name": "reciclagem:tipos_residuos",
+                    "permission": "reciclagem.view_reciclagem",
+                },
             ],
         }
     ]

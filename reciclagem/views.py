@@ -7,6 +7,7 @@ from django.views.generic import (
 from .models import *
 from .forms import UnidadeForm
 
+
 '''
 def ser_recicla(request, pk=None):
     """
