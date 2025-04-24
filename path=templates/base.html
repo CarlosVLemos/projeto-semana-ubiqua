@@ -1,0 +1,17 @@
+        <ul class="menu-inner py-1">
+          {% for section, items in menu_items.items %}
+            {# … aqui vai seu menu principal … #}
+          {% endfor %}
+
+          {# ====== AQUI o menu de Reciclagem ====== #}
+          <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Reciclagem</span>
+          </li>
+          <li
+            class="menu-item {% if request.resolver_match.namespace == 'reciclagem' %}active open{% endif %}">
+            <a href="{% url 'reciclagem:ser_recicla_list' %}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-recycle"></i>
+              <div class="text-truncate">Serviço Recicla</div>
+            </a>
+          </li>
+        </ul> 

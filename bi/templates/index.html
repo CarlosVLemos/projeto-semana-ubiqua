@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<style>
+  .botao {
+    background-image: linear-gradient(120deg, #619CFF,#896CFF, #B43AFF);
+    width: 100%;
+    color: white;
+  }
+
+  .botao:hover {
+    background-image: linear-gradient(120deg, #619CFF,#896CFF, #B43AFF);
+    color: rgb(255, 255, 255);
+  }
+
+  .card:hover {
+    box-shadow: 0 0 11px rgba(33, 33, 33, 0.35);
+  }
+</style>
+{% endblock extra_head %}
+
+{% block content %}
+<div class="container-xxl flex-grow-1 container-p-y">
+  <div class="row">
+    <h1 class="text-center">Template</h1>
+  </div>
+</div>
+{% endblock %}
