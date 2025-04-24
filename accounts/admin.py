@@ -23,7 +23,6 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ('is_active', 'is_staff', 'is_superuser')
     fieldsets = (
         ('Usuário', {'fields': ('username', 'email', 'password')}),
-        ('Turma', {'fields': ('turma',)}),
         ('Permissões', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Datas', {'fields': ('last_login', 'date_joined')}),
     )

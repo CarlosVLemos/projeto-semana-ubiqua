@@ -284,8 +284,7 @@
                           </div>
                           <div class="flex-grow-1">
                             <span class="fw-medium d-block"
-                              >{{ user.get_full_name|default:user.username
-                              }}</span
+                              >{{ user.username }}</span
                             >
                             <small class="text-muted"
                               >{{ user.profile.role|default:"User" }}</small
@@ -315,13 +314,17 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a
-                        class="dropdown-item"
-                        href="{% url 'accounts:logout' %}"
-                      >
-                        <i class="bx bx-power-off me-2"></i>
-                        <span class="align-middle">Sair</span>
-                      </a>
+                      <form method="post" action="{% url 'accounts:logout' %}" class="m-3">
+                        {% csrf_token %}
+                        <button
+                          type="submit"
+                          class="dropdown-item"
+                          style="background: none; border: none; padding: 0; cursor: pointer; width: 100%; text-align: left;"
+                        >
+                          <i class="bx bx-power-off me-2"></i>
+                          <span class="align-middle">Sair</span>
+                        </button>
+                      </form>
                     </li>
                   </ul>
                 </li>
