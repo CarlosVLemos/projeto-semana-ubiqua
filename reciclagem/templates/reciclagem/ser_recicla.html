@@ -1,3 +1,5 @@
+# reciclagem/urls.py
+path('<int:pk>/', views.ser_recicla, name='ser_recicla_update'), # <--- O nome é 'ser_recicla_update'
 {% extends "base.html" %}
 
 {% block title %}Cadastro de Reciclagem{% endblock %}
@@ -143,9 +145,10 @@
               <td>{{ reg.tipo_residuo.nome }}</td>
               <td class="text-end">{{ reg.quantidade }}</td>
               <td class="text-center">
-                <a href="{% url 'reciclagem:ser_recicla_edit' reg.pk %}" class="btn btn-sm btn-warning me-1">
+                <a href="{% url 'reciclagem:ser_recicla_update' reg.pk %}" class="btn btn-sm btn-warning me-1">
                   <i class="bi bi-pencil"></i>
                 </a>
+                
                 <a href="{% url 'reciclagem:ser_recicla_delete' reg.pk %}" class="btn btn-sm btn-danger" onclick="return confirm('Confirmar exclusão?');">
                   <i class="bi bi-trash"></i>
                 </a>

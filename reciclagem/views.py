@@ -1,6 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Reciclagem
 from .forms  import ReciclagemForm
+from django.urls import reverse_lazy
+from django.views.generic import (
+    ListView, CreateView, UpdateView, DeleteView
+)
+from .models import Turno, Unidade, TipoResiduo
+from .forms import (
+    TurnoForm, UnidadeForm, TipoResiduoForm
+)
 
 def ser_recicla(request, pk=None):
     """
@@ -33,3 +41,50 @@ def ser_recicla_delete(request, pk):
     """
     get_object_or_404(Reciclagem, pk=pk).delete()
     return redirect('reciclagem:ser_recicla_list')
+
+# ---------- UNIDADES ----------
+class UnidadeListView(ListView):
+    model = Unidade
+    template_name = 'reciclagem/unidade_list.html'
+    context_object_name = 'unidades'
+
+class UnidadeCreateView(CreateView):
+    model = Unidade
+    form_class = UnidadeForm
+    template_name = 'reciclagem/unidade_form.html'
+    success_url = reverse_lazy('reciclagem:unidade_list')
+
+class UnidadeUpdateView(UpdateView):
+    model = Unidade
+    form_class = UnidadeForm
+    template_name = 'reciclagem/unidade_form.html'
+    success_url = reverse_lazy('reciclagem:unidade_list')
+
+class UnidadeDeleteView(DeleteView):
+    model = Unidade
+    template_name = 'reciclagem/unidade_confirm_delete.html'
+    success_url = reverse_lazy('reciclagem:unidade_list')
+
+
+# ---------- TIPOS DE RESÍDUO ----------
+class TipoResiduoListView(ListView):
+    model = TipoResiduo
+    template_name = 'reciclagem/tiporesiduo_list.html'
+    context_object_name = 'tipos'
+
+class TipoResiduoCreateView(CreateView):
+    model = TipoResiduo
+    form_class = TipoResiduoForm
+    template_name = 'reciclagem/tiporesiduo_form.html'
+    success_url = reverse_lazy('reciclagem:tiporesiduo_list')
+
+class TipoResiduoUpdateView(UpdateView):
+    model = TipoResiduo
+    form_class = TipoResiduoForm
+    template_name = 'reciclagem/tiporesiduo_form.html'
+    success_url = reverse_lazy('reciclagem:tiporesiduo_list')
+
+class TipoResiduoDeleteView(DeleteView):
+    model = TipoResiduo
+    template_name = 'reciclagem/tiporesiduo_confirm_delete.html'
+    success_url = reverse_lazy('reciclagem:tiporesiduo_list')
