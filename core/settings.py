@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,10 +32,12 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'bi.apps.BiConfig',
     'reciclagem.apps.ReciclagemConfig',
+    'api.apps.ApiConfig',
     'crispy_forms',
     'crispy_bootstrap5',
     'rest_framework',
     'drf_yasg',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +50,28 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+}
+
+
+SIMPLE_JWT = {
+    # Definindo a expiração do token de acesso para uma hora
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    # Tempo de vida do token de atualização
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=15),
+}
+
 
 
 STORAGES = {

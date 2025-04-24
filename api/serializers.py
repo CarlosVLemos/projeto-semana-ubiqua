@@ -1,5 +1,17 @@
 from rest_framework import serializers
 from reciclagem.models import Unidade, Curso, Turma, Aluno, TipoResiduos, Reciclagem
+from accounts.models import User
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+
+class LoginSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('email', 'password')
+
 class UnidadeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Unidade
