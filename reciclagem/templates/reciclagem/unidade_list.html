@@ -11,18 +11,20 @@
     <table
       class="table table-sm table-bordered table-striped table-hover align-middle"
     >
-      <thead class="table-dark">
+      <thead>
         <tr>
-          <th>Código</th>
           <th>Nome</th>
+          <th>Cidade</th>
+          <th>Estado</th>
           <th class="text-center">Ações</th>
         </tr>
       </thead>
       <tbody>
         {% for u in unidades %}
         <tr>
-          <td>{{ u.get_code_display }}</td>
           <td>{{ u.nome }}</td>
+          <td>{{ u.cidade }}</td>
+          <td>{{ u.estado }}</td>
           <td class="text-center">
             <a
               href="{% url 'reciclagem:unidade_update' u.pk %}"
