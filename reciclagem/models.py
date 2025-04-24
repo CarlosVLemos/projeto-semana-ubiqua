@@ -4,6 +4,7 @@ from django.dispatch import receiver
 from django.utils.text import slugify
 
 # Signal para criar dados padrão automaticamente
+'''
 @receiver(post_migrate)
 def create_default_residuos_and_unidades(sender, **kwargs):
     if sender.label == 'reciclagem':  # Substitua 'app_name' pelo nome da sua app
@@ -28,109 +29,88 @@ def create_default_residuos_and_unidades(sender, **kwargs):
         Turno.objects.get_or_create(code='matutino', nome='Matutino')
         Turno.objects.get_or_create(code='vespertino', nome='Vespertino')
         Turno.objects.get_or_create(code='noturno', nome='Noturno')
-
+'''
 
 # Models ajustados para não alterar o comportamento atual
 
-class TipoResiduo(models.Model):
-    nome = models.CharField(max_length=50, unique=True)
-    codigo = models.CharField(max_length=50, unique=True, blank=True)
-
-    def save(self, *args, **kwargs):
-        if not self.codigo:
-            self.codigo = slugify(self.nome)
-        super().save(*args, **kwargs)
+class Cidade(models.Model):
+    nome = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
-        return self.nome
+        return f"{self.nome}"
 
     class Meta:
-        verbose_name = 'Tipo de Resíduo'
-        verbose_name_plural = 'Tipos de Resíduos'
+        verbose_name = 'Cidade'
+        verbose_name_plural = 'Cidades'
 
-
-class Unidade(models.Model):
-    ALCINDO_CANCELA = 'alcindo_cancela'
-    ANANINDEUA = 'ananindeua'
-    OUTRO = 'outro'
-    UNIDADES = [
-        (ALCINDO_CANCELA, 'Unama Alcindo Cancela'),
-        (ANANINDEUA, 'Unama Ananindeua'),
-        (OUTRO, 'Outro'),
-    ]
-
-    code = models.CharField(
-        max_length=50,
-        choices=UNIDADES,
-        unique=True,
-        help_text='Código interno da unidade',
-        default=ALCINDO_CANCELA  # Definindo um valor padrão
-    )
-    nome = models.CharField(
-        max_length=100,
-        help_text='Nome completo da unidade'
-    )
+class Estado(models.Model):
+    nome = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
-        return self.nome
+        return f"{self.nome}"
+
+    class Meta:
+        verbose_name = 'Estado'
+        verbose_name_plural = 'Estados'
+
+class Unidade(models.Model):
+    nome = models.CharField(max_length=100, unique=True)
+    endereco = models.CharField(max_length=255)
+    cidade = models.ForeignKey(Cidade, on_delete=models.CASCADE, related_name='unidades', blank=True, null=True)
+    estado = models.ForeignKey(Estado, on_delete=models.CASCADE, related_name='unidades', blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.nome} ({self.cidade.nome} - {self.estado.nome})"
 
     class Meta:
         verbose_name = 'Unidade'
         verbose_name_plural = 'Unidades'
 
-
-class Turno(models.Model):
-    MATUTINO   = 'matutino'
-    VESPERTINO = 'vespertino'
-    NOTURNO    = 'noturno'
-    TURNOS = [
-        (MATUTINO,   'Matutino'),
-        (VESPERTINO, 'Vespertino'),
-        (NOTURNO,    'Noturno'),
-    ]
-
-    code = models.CharField(
-        max_length=20,
-        choices=TURNOS,
-        unique=True,
-        help_text='Código interno do turno'
-    )
-    nome = models.CharField(
-        max_length=20,
-        help_text='Descrição amigável do turno'
-    )
+class Curso(models.Model):
+    nome = models.CharField(max_length=100, unique=True)
+    duracao = models.IntegerField(help_text="Duração em Semestres")
+    coordenador = models.CharField(max_length=100, help_text="Nome do Coordenador")
+    unidade = models.ForeignKey(Unidade, on_delete=models.CASCADE, related_name='cursos')
 
     def __str__(self):
-        return self.nome
+        return f"{self.nome} ({self.unidade.nome})"
 
     class Meta:
-        verbose_name = 'Turno'
-        verbose_name_plural = 'Turnos'
+        verbose_name = 'Curso'
+        verbose_name_plural = 'Cursos'
 
-
-class Reciclagem(models.Model):
-    nome           = models.CharField(max_length=100)
-    matricula      = models.CharField(max_length=20)
-    turma          = models.CharField(max_length=20)
-    turno          = models.ForeignKey(
-                        Turno,
-                        on_delete=models.PROTECT,
-                        verbose_name='Turno'
-                     )
-    semestre       = models.CharField(max_length=10)
-    unidade        = models.ForeignKey(
-                        Unidade,
-                        on_delete=models.PROTECT,
-                        verbose_name='Unidade'
-                     )
-    tipo_residuo   = models.ForeignKey(
-                        TipoResiduo,
-                        on_delete=models.PROTECT,
-                        verbose_name='Tipo de Resíduo'
-                     )
-    quantidade     = models.PositiveIntegerField()
-    criado_em      = models.DateTimeField(auto_now_add=True)
-    atualizado_em  = models.DateTimeField(auto_now=True)
+class Turma(models.Model):
+    nome = models.CharField(max_length=100, unique=True)
+    semestre = models.IntegerField()
+    turno = models.CharField(max_length=50, choices=[('Manhã', 'Manhã'), ('Tarde', 'Tarde'), ('Noite', 'Noite')])
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE, related_name='turmas')
 
     def __str__(self):
-        return f"{self.nome} – {self.tipo_residuo} ({self.quantidade})"
+        return f"{self.nome} ({self.curso.nome})"
+
+    class Meta:
+        verbose_name = 'Turma'
+        verbose_name_plural = 'Turmas'
+
+class TipoResiduos(models.Model):
+    nome = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return f"{self.nome}"
+
+    class Meta:
+        verbose_name = 'Tipo de Resíduo'
+        verbose_name_plural = 'Tipos de Resíduos'
+
+class Reciclagem(models.Model):
+    quantidade = models.FloatField(help_text="Quantidade em kg")
+    tipo_residuo = models.ForeignKey(TipoResiduos, on_delete=models.CASCADE, related_name='reciclagens')
+    aluno = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='reciclagens', blank=True, null=True)
+    data = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.data} - {self.tipo_residuo.nome} ({self.unidade.nome})"
+
+    class Meta:
+        verbose_name = 'Reciclagem'
+        verbose_name_plural = 'Reciclagens'

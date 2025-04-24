@@ -1,6 +1,7 @@
 from django import forms
-from .models import Reciclagem, Turno, Unidade, TipoResiduo
+from .models import *
 
+'''
 class TurnoForm(forms.ModelForm):
     class Meta:
         model  = Turno
@@ -46,3 +47,5 @@ class ReciclagemForm(forms.ModelForm):
             'tipo_residuo': forms.Select(attrs={'class': 'form-select form-select-sm'}),
             'quantidade':   forms.NumberInput(attrs={'class': 'form-control form-control-sm'}),
         }
+
+'''

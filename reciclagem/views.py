@@ -1,3 +1,4 @@
+'''
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Reciclagem
 from .forms  import ReciclagemForm
@@ -5,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic import (
     ListView, CreateView, UpdateView, DeleteView
 )
-from .models import Turno, Unidade, TipoResiduo
+from .models import *
 from .forms import (
     TurnoForm, UnidadeForm, TipoResiduoForm
 )
@@ -88,3 +89,5 @@ class TipoResiduoDeleteView(DeleteView):
     model         = TipoResiduo
     template_name = 'reciclagem/tiporesiduo_confirm_delete.html'
     success_url   = reverse_lazy('reciclagem:tiporesiduo_list')
+
+'''

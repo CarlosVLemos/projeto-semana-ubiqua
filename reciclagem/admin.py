@@ -1,11 +1,10 @@
 from django.contrib import admin
-from .models import Reciclagem
+from .models import Unidade, Turma, TipoResiduos, Cidade, Estado, Curso, Reciclagem
 
-class ReciclagemAdmin(admin.ModelAdmin):
-    list_display  = ('nome','matricula','turma','turno',
-                     'semestre','unidade','tipo_residuo',
-                     'quantidade','criado_em')
-    list_filter   = ('turma','turno','unidade','tipo_residuo')
-    search_fields = ('nome','matricula')
-
-admin.site.register(Reciclagem, ReciclagemAdmin)
+admin.site.register(Reciclagem)
+admin.site.register(Unidade)
+admin.site.register(Turma)
+admin.site.register(TipoResiduos)
+admin.site.register(Cidade)
+admin.site.register(Estado)
+admin.site.register(Curso)
