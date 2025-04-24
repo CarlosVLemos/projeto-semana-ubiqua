@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Alunos
+{% endblock %}
+
+{% block content %}
+  <div class="container-fluid flex-grow-1 container-p-y">
+    <h1 class="mb-4">Alunos</h1>
+    <div class="d-flex justify-content-end mb-3">
+      <a href="{% url 'reciclagem:aluno_create' %}" class="btn btn-primary">
+        <i class="bi bi-plus-circle me-1"></i>Novo Aluno
+      </a>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-sm table-bordered table-striped table-hover align-middle">
+        <thead class="">
+          <tr>
+            <th>Nome</th>
+            <th>Matrícula</th>
+            <th>Turma</th>
+            <th>Curso</th>
+            <th class="text-center">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+            <tr>
+              <td>{{ item.nome }}</td>
+              <td>{{ item.matricula }}</td>
+              <td>{{ item.turma }}</td>
+              <td>{{ item.turma.curso }}</td>
+              <td class="text-center">
+                <a href="{% url 'reciclagem:aluno_update' item.id %}" class="btn btn-sm btn-warning me-1">
+                  <i class="bi bi-pencil"></i>
+                </a>
+                <a href="{% url 'reciclagem:aluno_delete' item.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Confirmar exclusão?');">
+                  <i class="bi bi-trash"></i>
+                </a>
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="3" class="text-center">
+                Nenhum tipo de resíduo cadastrado.
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endblock content %}

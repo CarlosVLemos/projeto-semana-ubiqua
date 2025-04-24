@@ -43,7 +43,7 @@ def generate_views(modelo, form=None, paginacao=10, template_dir=''):
 
     def generated_delete_object(request, pk):
         get_object_or_404(modelo, pk=pk).delete()
-        return redirect(f'reciclagem:{modelo._meta.model_name}')
+        return redirect(f'reciclagem:{modelo._meta.model_name}_list')
 
     return {
         'list_view': GeneratedListView,

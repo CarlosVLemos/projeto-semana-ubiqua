@@ -56,11 +56,11 @@ class Estado(models.Model):
 class Unidade(models.Model):
     nome = models.CharField(max_length=100, unique=True)
     endereco = models.CharField(max_length=255)
-    cidade = models.ForeignKey(Cidade, on_delete=models.CASCADE, related_name='unidades', blank=True, null=True)
-    estado = models.ForeignKey(Estado, on_delete=models.CASCADE, related_name='unidades', blank=True, null=True)
+    cidade = models.ForeignKey(Cidade, on_delete=models.SET_NULL, related_name='unidades', blank=True, null=True)
+    estado = models.ForeignKey(Estado, on_delete=models.SET_NULL, related_name='unidades', blank=True, null=True)
 
     def __str__(self):
-        return f"{self.nome} ({self.cidade.nome} - {self.estado.nome})"
+        return f"{self.nome} ({self.cidade.nome}/{self.estado.nome})"
 
     class Meta:
         verbose_name = 'Unidade'
@@ -70,10 +70,10 @@ class Curso(models.Model):
     nome = models.CharField(max_length=100, unique=True)
     duracao = models.IntegerField(help_text="Duração em Semestres")
     coordenador = models.CharField(max_length=100, help_text="Nome do Coordenador")
-    unidade = models.ForeignKey(Unidade, on_delete=models.CASCADE, related_name='cursos')
+    unidade = models.ForeignKey(Unidade, on_delete=models.SET_NULL, related_name='cursos', blank=True, null=True)
 
     def __str__(self):
-        return f"{self.nome} ({self.unidade.nome})"
+        return f"{self.nome} | {self.unidade}"
 
     class Meta:
         verbose_name = 'Curso'
@@ -83,14 +83,28 @@ class Turma(models.Model):
     nome = models.CharField(max_length=100, unique=True)
     semestre = models.IntegerField()
     turno = models.CharField(max_length=50, choices=[('Manhã', 'Manhã'), ('Tarde', 'Tarde'), ('Noite', 'Noite')])
-    curso = models.ForeignKey(Curso, on_delete=models.CASCADE, related_name='turmas')
+    curso = models.ForeignKey(Curso, on_delete=models.SET_NULL, related_name='turmas', blank=True, null=True)
 
     def __str__(self):
-        return f"{self.nome} ({self.curso.nome})"
+        return f"{self.nome}"
 
     class Meta:
         verbose_name = 'Turma'
         verbose_name_plural = 'Turmas'
+
+class Aluno(models.Model):
+    nome = models.CharField(max_length=100, unique=True)
+    email = models.EmailField(unique=True, blank=True, null=True)
+    telefone = models.CharField(max_length=15, blank=True, null=True)
+    matricula = models.CharField(max_length=20, unique=True, blank=True, null=True)
+    turma = models.ForeignKey(Turma, on_delete=models.SET_NULL, related_name='alunos', blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.nome} ({self.matricula})"
+
+    class Meta:
+        verbose_name = 'Aluno'
+        verbose_name_plural = 'Alunos'
 
 class TipoResiduos(models.Model):
     nome = models.CharField(max_length=100, unique=True)
@@ -104,12 +118,12 @@ class TipoResiduos(models.Model):
 
 class Reciclagem(models.Model):
     quantidade = models.FloatField(help_text="Quantidade em kg")
-    tipo_residuo = models.ForeignKey(TipoResiduos, on_delete=models.CASCADE, related_name='reciclagens')
-    aluno = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='reciclagens', blank=True, null=True)
     data = models.DateField(auto_now_add=True)
+    tipo_residuo = models.ForeignKey(TipoResiduos, on_delete=models.SET_NULL, related_name='reciclagens', blank=True, null=True)
+    aluno = models.ForeignKey(Aluno, on_delete=models.SET_NULL, related_name='reciclagens', blank=True, null=True)
 
     def __str__(self):
-        return f"{self.data} - {self.tipo_residuo.nome} ({self.unidade.nome})"
+        return f"{self.data} - {self.tipo_residuo.nome}"
 
     class Meta:
         verbose_name = 'Reciclagem'

@@ -20,20 +20,20 @@
         </tr>
       </thead>
       <tbody>
-        {% for u in unidades %}
+        {% for item in items %}
         <tr>
-          <td>{{ u.nome }}</td>
-          <td>{{ u.cidade }}</td>
-          <td>{{ u.estado }}</td>
+          <td>{{ item.nome }}</td>
+          <td>{{ item.cidade }}</td>
+          <td>{{ item.estado }}</td>
           <td class="text-center">
             <a
-              href="{% url 'reciclagem:unidade_update' u.pk %}"
+              href="{% url 'reciclagem:unidade_update' item.pk %}"
               class="btn btn-sm btn-warning me-1"
             >
               <i class="bi bi-pencil"></i>
             </a>
             <a
-              href="{% url 'reciclagem:unidade_delete' u.pk %}"
+              href="{% url 'reciclagem:unidade_delete' item.pk %}"
               class="btn btn-sm btn-danger"
               onclick="return confirm('Confirmar exclusão?');"
             >
