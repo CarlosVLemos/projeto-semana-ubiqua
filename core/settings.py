@@ -72,7 +72,19 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=15),
 }
 
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS',
+]
 
+CORS_ALLOW_HEADERS = [
+    'content-type',
+    'authorization',
+]
 
 STORAGES = {
     # ...
