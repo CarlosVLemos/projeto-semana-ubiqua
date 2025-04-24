@@ -68,23 +68,23 @@ class UnidadeDeleteView(DeleteView):
 
 # ---------- TIPOS DE RESÍDUO ----------
 class TipoResiduoListView(ListView):
-    model = TipoResiduo
-    template_name = 'reciclagem/tiporesiduo_list.html'
+    model               = TipoResiduo
+    template_name       = 'reciclagem/tiporesiduo_list.html'
     context_object_name = 'tipos'
 
 class TipoResiduoCreateView(CreateView):
-    model = TipoResiduo
-    form_class = TipoResiduoForm
+    model         = TipoResiduo
+    form_class    = TipoResiduoForm
     template_name = 'reciclagem/tiporesiduo_form.html'
-    success_url = reverse_lazy('reciclagem:tiporesiduo_list')
+    success_url   = reverse_lazy('reciclagem:tiporesiduo_list')
 
 class TipoResiduoUpdateView(UpdateView):
-    model = TipoResiduo
-    form_class = TipoResiduoForm
+    model         = TipoResiduo
+    form_class    = TipoResiduoForm
     template_name = 'reciclagem/tiporesiduo_form.html'
-    success_url = reverse_lazy('reciclagem:tiporesiduo_list')
+    success_url   = reverse_lazy('reciclagem:tiporesiduo_list')
 
 class TipoResiduoDeleteView(DeleteView):
-    model = TipoResiduo
+    model         = TipoResiduo
     template_name = 'reciclagem/tiporesiduo_confirm_delete.html'
-    success_url = reverse_lazy('reciclagem:tiporesiduo_list')
+    success_url   = reverse_lazy('reciclagem:tiporesiduo_list')

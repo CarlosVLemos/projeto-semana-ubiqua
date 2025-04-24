@@ -1,11 +1,12 @@
 from django.db import models
 from django.db.models.signals import post_migrate
 from django.dispatch import receiver
+from django.utils.text import slugify
 
 # Signal para criar dados padrão automaticamente
 @receiver(post_migrate)
 def create_default_residuos_and_unidades(sender, **kwargs):
-    if sender.label == 'app_name':  # Substitua 'app_name' pelo nome da sua app
+    if sender.label == 'reciclagem':  # Substitua 'app_name' pelo nome da sua app
         # Criando os tipos de resíduos padrão
         TipoResiduo.objects.get_or_create(codigo='aluminio', nome='Alumínio')
         TipoResiduo.objects.get_or_create(codigo='vidro', nome='Vidro')
@@ -23,11 +24,22 @@ def create_default_residuos_and_unidades(sender, **kwargs):
         Unidade.objects.get_or_create(code='ananindeua', nome='Unama Ananindeua')
         Unidade.objects.get_or_create(code='outro', nome='Outro')
 
+        # Criando os turnos padrão
+        Turno.objects.get_or_create(code='matutino', nome='Matutino')
+        Turno.objects.get_or_create(code='vespertino', nome='Vespertino')
+        Turno.objects.get_or_create(code='noturno', nome='Noturno')
+
+
 # Models ajustados para não alterar o comportamento atual
 
 class TipoResiduo(models.Model):
     nome = models.CharField(max_length=50, unique=True)
-    codigo = models.CharField(max_length=50, unique=True)
+    codigo = models.CharField(max_length=50, unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.codigo:
+            self.codigo = slugify(self.nome)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.nome

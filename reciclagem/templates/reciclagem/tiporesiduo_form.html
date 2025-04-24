@@ -19,21 +19,13 @@
           </h2>
           <form method="post" class="row g-3">
             {% csrf_token %}
-            <div class="col-12 col-md-6">
-              {{ form.codigo.label_tag }} {{ form.codigo }}
-              {% if form.codigo.errors %}
-                <div class="invalid-feedback d-block">
-                  {{ form.codigo.errors|striptags }}
-                </div>
-              {% endif %}
-            </div>
-            <div class="col-12 col-md-6">
+            <div class="col-12">
               {{ form.nome.label_tag }} {{ form.nome }}
-              {% if form.nome.errors %}
-                <div class="invalid-feedback d-block">
-                  {{ form.nome.errors|striptags }}
-                </div>
-              {% endif %}
+              {% for err in form.nome.errors %}
+                <div class="invalid-feedback d-block">{{ err }}</div>
+              {% empty %}
+                <!-- Opcional: Adicionar feedback quando não houver erros -->
+              {% endfor %}
             </div>
             <div class="col-12 d-flex justify-content-end">
               <button type="submit" class="btn btn-success">

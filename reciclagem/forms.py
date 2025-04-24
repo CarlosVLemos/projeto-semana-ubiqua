@@ -3,7 +3,7 @@ from .models import Reciclagem, Turno, Unidade, TipoResiduo
 
 class TurnoForm(forms.ModelForm):
     class Meta:
-        model = Turno
+        model  = Turno
         fields = ['code', 'nome']
         widgets = {
             'code': forms.Select(attrs={'class': 'form-select form-select-sm'}),
@@ -12,7 +12,7 @@ class TurnoForm(forms.ModelForm):
 
 class UnidadeForm(forms.ModelForm):
     class Meta:
-        model = Unidade
+        model  = Unidade
         fields = ['code', 'nome']
         widgets = {
             'code': forms.Select(attrs={'class': 'form-select form-select-sm'}),
@@ -21,16 +21,16 @@ class UnidadeForm(forms.ModelForm):
 
 class TipoResiduoForm(forms.ModelForm):
     class Meta:
-        model = TipoResiduo
-        fields = ['codigo', 'nome']
+        model  = TipoResiduo
+        # só pedimos o nome, o código será slugificado automaticamente
+        fields = ['nome']
         widgets = {
-            'codigo': forms.Select(attrs={'class': 'form-select form-select-sm'}),
             'nome': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
         }
 
 class ReciclagemForm(forms.ModelForm):
     class Meta:
-        model = Reciclagem
+        model  = Reciclagem
         fields = [
             'nome', 'matricula', 'turma',
             'turno', 'semestre', 'unidade',

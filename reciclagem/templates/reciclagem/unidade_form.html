@@ -1,11 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  {% if view.object %} 
-    {{ view.object|default_if_none:"Nova" }} Unidade 
-  {% else %} 
-    Nova Unidade 
-  {% endif %}
+  {{ view.object|default_if_none:"Nova" }} Unidade
 {% endblock title %}
 
 {% block content %}
@@ -16,28 +12,24 @@
         <div class="card-body">
           <h2 class="card-title mb-4">
             {% if view.object %}
-              <i class="bi bi-pencil-square me-2"></i>Editar Unidade 
+              <i class="bi bi-pencil-square me-2"></i>Editar Unidade
             {% else %}
-              <i class="bi bi-plus-circle me-2"></i>Nova Unidade 
+              <i class="bi bi-plus-circle me-2"></i>Nova Unidade
             {% endif %}
           </h2>
           <form method="post" class="row g-3">
             {% csrf_token %}
             <div class="col-12 col-md-6">
-              {{ form.codigo.label_tag }} {{ form.codigo }} 
-              {% if form.codigo.errors %}
-                <div class="invalid-feedback d-block">
-                  {{ form.codigo.errors|striptags }}
-                </div>
-              {% endif %}
+              {{ form.code.label_tag }} {{ form.code }}
+              {% for err in form.code.errors %}
+                <div class="invalid-feedback d-block">{{ err }}</div>
+              {% endfor %}
             </div>
             <div class="col-12 col-md-6">
-              {{ form.nome.label_tag }} {{ form.nome }} 
-              {% if form.nome.errors %}
-                <div class="invalid-feedback d-block">
-                  {{ form.nome.errors|striptags }}
-                </div>
-              {% endif %}
+              {{ form.nome.label_tag }} {{ form.nome }}
+              {% for err in form.nome.errors %}
+                <div class="invalid-feedback d-block">{{ err }}</div>
+              {% endfor %}
             </div>
             <div class="col-12 d-flex justify-content-end">
               <button type="submit" class="btn btn-success">
