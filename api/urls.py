@@ -4,6 +4,7 @@ from .views import UnidadeViewSet, CursoViewSet, TurmaViewSet, AlunoViewSet, Tip
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from core.swagger import CustomSchemaGenerator
 
 router = DefaultRouter()
 router.register(r'unidades', UnidadeViewSet)
@@ -22,6 +23,7 @@ schema_view = get_schema_view(
    ),
    public=True,
    permission_classes=(permissions.AllowAny,),
+   generator_class=CustomSchemaGenerator,
 )
 
 urlpatterns = [
