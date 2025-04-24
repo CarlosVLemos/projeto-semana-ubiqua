@@ -12,6 +12,52 @@ def menu_items(request):
             "section": "Início",
             "header": True,
         },
+        {
+            "label": "Reciclagem",
+            "icon": "bx bx-recycle",
+            "section": "Ser Recicla",
+            "permission": "reciclagem.view_reciclagem",
+            "sub_items": [
+                {
+                    "label": "Reciclagem",
+                    "url_name": "reciclagem:reciclagem_list",
+                    "permission": "reciclagem.view_reciclagem",
+                },
+                {
+                    "label": "Tipo Residuos",
+                    "url_name": "reciclagem:tiporesiduos_list",
+                    "permission": "reciclagem.view_tiporesiduos",
+                },
+            ],
+        },
+        {
+            "label": "Cadastros",
+            "icon": "bx bx-book",
+            "section": "Institucional",
+            "permission": "reciclagem.view_reciclagem",
+            "sub_items": [
+                {
+                    "label": "Unidades",
+                    "url_name": "reciclagem:unidade_list",
+                    "permission": "reciclagem.view_unidade",
+                },
+                {
+                    "label": "Cursos",
+                    "url_name": "reciclagem:curso_list",
+                    "permission": "reciclagem.view_curso",
+                },
+                {
+                    "label": "Turmas",
+                    "url_name": "reciclagem:turma_list",
+                    "permission": "reciclagem.view_turma",
+                },
+                {
+                    "label": "Alunos",
+                    "url_name": "reciclagem:aluno_list",
+                    "permission": "reciclagem.view_aluno",
+                },
+            ],
+        }
     ]
   
 

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  {{ view.object|default_if_none:"Novo" }} Curso
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid flex-grow-1 container-p-y">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="card border-2 border-dark rounded mb-5 shadow-sm">
+        <div class="card-body">
+          <h2 class="card-title mb-4">
+            {% if view.object %}
+              <i class="bi bi-pencil-square me-2"></i>Editar Curso
+            {% else %}
+              <i class="bi bi-plus-circle me-2"></i>Novo Curso
+            {% endif %}
+          </h2>
+          <form method="post" class="row g-3">
+            {% csrf_token %}
+            <div class="col-12">
+              {{ form|crispy}}
+              {% for err in form.nome.errors %}
+                <div class="invalid-feedback d-block">{{ err }}</div>
+              {% empty %}
+                <!-- Opcional: Adicionar feedback quando não houver erros -->
+              {% endfor %}
+            </div>
+            <div class="col-12 d-flex justify-content-end">
+              <button type="submit" class="btn btn-success">
+                {% if view.object %}Atualizar{% else %}Salvar{% endif %}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

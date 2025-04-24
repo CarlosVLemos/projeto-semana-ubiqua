@@ -21,3 +21,8 @@ class UserAdmin(BaseUserAdmin):
     list_display = ('username', 'email', 'is_active', 'is_staff', 'is_superuser')
     search_fields = ('username', 'email')
     list_filter = ('is_active', 'is_staff', 'is_superuser')
+    fieldsets = (
+        ('Usuário', {'fields': ('username', 'email', 'password')}),
+        ('Permissões', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        ('Datas', {'fields': ('last_login', 'date_joined')}),
+    )
