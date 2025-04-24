@@ -33,6 +33,8 @@ INSTALLED_APPS = [
     'reciclagem.apps.ReciclagemConfig',
     'crispy_forms',
     'crispy_bootstrap5',
+    'rest_framework',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [

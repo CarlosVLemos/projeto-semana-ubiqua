@@ -1,8 +1,12 @@
 
-from django.urls import path
+from django.urls import path, include
 from .views import *
 from .forms import *
 from utils.generate_view import generate_views
+from rest_framework.routers import DefaultRouter
+
+
+
 
 app_name = 'reciclagem'
 
@@ -13,8 +17,20 @@ aluno = generate_views(Aluno, AlunoForm, 10, template_dir='aluno')
 tipo_residuos = generate_views(TipoResiduos, TipoResiduosForm, 10, template_dir='tiporesiduos')
 reciclagem = generate_views(Reciclagem, ReciclagemForm, 10, template_dir='reciclagem')
 
+router = DefaultRouter()
+router.register(r'api/unidades', UnidadeViewSet)
+router.register(r'api/cursos', CursoViewSet)
+router.register(r'api/turmas', TurmaViewSet)
+router.register(r'api/alunos', AlunoViewSet)
+router.register(r'api/tipos-residuos', TipoResiduosViewSet)
+router.register(r'api/reciclagem', ReciclagemViewSet)
+
+
+
+
 
 urlpatterns = [
+    path('', include(router.urls)),
     path('unidade/', unidade['list_view'].as_view(), name='unidade_list'),
     path('unidades/novo/', unidade['create_view'].as_view(), name='unidade_create'),
     path('unidades/<int:pk>/editar/', unidade['update_view'].as_view(), name='unidade_update'),
@@ -45,5 +61,3 @@ urlpatterns = [
     path('reciclagem/<int:pk>/editar/', reciclagem['update_view'].as_view(), name='reciclagem_update'),
     path('reciclagem/<int:pk>/excluir/', reciclagem['delete_view'], name='reciclagem_delete'),
 ]
-
-
