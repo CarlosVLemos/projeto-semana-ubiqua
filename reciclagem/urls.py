@@ -1,5 +1,5 @@
 
-from django.urls import path
+from django.urls import path, include
 from .views import *
 from .forms import *
 from utils.generate_view import generate_views
@@ -12,7 +12,6 @@ turma = generate_views(Turma, TurmaForm, 10, template_dir='turma')
 aluno = generate_views(Aluno, AlunoForm, 10, template_dir='aluno')
 tipo_residuos = generate_views(TipoResiduos, TipoResiduosForm, 10, template_dir='tiporesiduos')
 reciclagem = generate_views(Reciclagem, ReciclagemForm, 10, template_dir='reciclagem')
-
 
 urlpatterns = [
     path('unidade/', unidade['list_view'].as_view(), name='unidade_list'),
@@ -45,5 +44,3 @@ urlpatterns = [
     path('reciclagem/<int:pk>/editar/', reciclagem['update_view'].as_view(), name='reciclagem_update'),
     path('reciclagem/<int:pk>/excluir/', reciclagem['delete_view'], name='reciclagem_delete'),
 ]
-
-
