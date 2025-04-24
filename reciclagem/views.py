@@ -1,16 +1,13 @@
-'''
+
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Reciclagem
-from .forms  import ReciclagemForm
 from django.urls import reverse_lazy
 from django.views.generic import (
     ListView, CreateView, UpdateView, DeleteView
 )
 from .models import *
-from .forms import (
-    TurnoForm, UnidadeForm, TipoResiduoForm
-)
+from .forms import UnidadeForm
 
+'''
 def ser_recicla(request, pk=None):
     """
     Se pk for passado, faz edição; senão cria novo.
@@ -43,6 +40,8 @@ def ser_recicla_delete(request, pk):
     get_object_or_404(Reciclagem, pk=pk).delete()
     return redirect('reciclagem:ser_recicla_list')
 
+'''
+
 # ---------- UNIDADES ----------
 class UnidadeListView(ListView):
     model = Unidade
@@ -66,7 +65,11 @@ class UnidadeDeleteView(DeleteView):
     template_name = 'reciclagem/unidade_confirm_delete.html'
     success_url = reverse_lazy('reciclagem:unidade_list')
 
+def unidade_delete(request, pk):
+    get_object_or_404(Unidade, pk=pk).delete()
+    return redirect('reciclagem:unidade_list')
 
+'''
 # ---------- TIPOS DE RESÍDUO ----------
 class TipoResiduoListView(ListView):
     model               = TipoResiduo

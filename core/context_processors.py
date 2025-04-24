@@ -12,6 +12,19 @@ def menu_items(request):
             "section": "Início",
             "header": True,
         },
+        {
+            "label": "Reciclagem",
+            "icon": "bx bx-recycle",
+            "section": "Ser Recicla",
+            "permission": "reciclagem.view_reciclagem",
+            "sub_items": [
+                {
+                    "label": "Unidades",
+                    "url_name": "reciclagem:unidade_list",
+                    "permission": "reciclagem.view_unidade",
+                },
+            ],
+        }
     ]
   
 

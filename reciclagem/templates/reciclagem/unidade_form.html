@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}
   {{ view.object|default_if_none:"Nova" }} Unidade
@@ -19,18 +20,7 @@
           </h2>
           <form method="post" class="row g-3">
             {% csrf_token %}
-            <div class="col-12 col-md-6">
-              {{ form.code.label_tag }} {{ form.code }}
-              {% for err in form.code.errors %}
-                <div class="invalid-feedback d-block">{{ err }}</div>
-              {% endfor %}
-            </div>
-            <div class="col-12 col-md-6">
-              {{ form.nome.label_tag }} {{ form.nome }}
-              {% for err in form.nome.errors %}
-                <div class="invalid-feedback d-block">{{ err }}</div>
-              {% endfor %}
-            </div>
+            {{ form|crispy }}
             <div class="col-12 d-flex justify-content-end">
               <button type="submit" class="btn btn-success">
                 {% if view.object %}Atualizar{% else %}Salvar{% endif %}

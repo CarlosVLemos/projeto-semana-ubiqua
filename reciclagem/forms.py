@@ -10,15 +10,26 @@ class TurnoForm(forms.ModelForm):
             'code': forms.Select(attrs={'class': 'form-select form-select-sm'}),
             'nome': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
         }
+'''
 
 class UnidadeForm(forms.ModelForm):
     class Meta:
         model  = Unidade
-        fields = ['code', 'nome']
+        fields = ['nome', 'endereco', 'cidade', 'estado']
         widgets = {
-            'code': forms.Select(attrs={'class': 'form-select form-select-sm'}),
-            'nome': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+            'nome':     forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+            'endereco': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+            'cidade':   forms.Select(attrs={'class': 'form-select form-select-sm'}),
+            'estado':   forms.Select(attrs={'class': 'form-select form-select-sm'}),
         }
+        labels = {
+            'nome':     'Nome da Unidade',
+            'endereco': 'Endereço',
+            'cidade':   'Cidade',
+            'estado':   'Estado',
+        }
+
+'''
 
 class TipoResiduoForm(forms.ModelForm):
     class Meta:
