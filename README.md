@@ -15,7 +15,7 @@ Este projeto é um sistema desenvolvido em Django para realizar o cadastro e vis
 
 ---
 
-## 🚀 Iniciando o Projeto SRH
+## 🚀 Iniciando o Projeto Ser recicla
 
 ### 1. Clone o repositório
 
@@ -25,7 +25,7 @@ git clone https://github.com/CarlosVLemos/projeto-semana-ubiqua
 
 
 #### 1. Entre na pasta do projeto e  crie o arquivo de um ambiente virtual antes de baixar as dependencias do projeto, no terminal digite
-bash
+
 cd projeto-semana-ubiqua
 python -m venv env
 
@@ -36,29 +36,29 @@ python -m venv env
 
 linux:
 
-bash
+
 source env/bin/activate
 
 
 
 windows:
-bash
+
 env\Scripts\activate
 
 
 #### 3. Baixe as dependencias do arquivo requirements.txt
-bash
+
 pip install -r requirements.txt
 
 
 #### 4. Fazer as migrações do sistema
-bash
+
 Python manage.py migrate
 
 
 
 #### 5. Crie um super usuario 
-bash
+
 python manage.py createsuperuser
 
 
@@ -68,7 +68,7 @@ lembre deles para fazer login na aplicação, e pode forçar a senha caso ela se
 
 
 #### 6. Rodar o Sistema
-bash
+
 Python manage.py runserver
 
 
