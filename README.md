@@ -24,14 +24,15 @@ git clone https://github.com/CarlosVLemos/projeto-semana-ubiqua
 
 
 
-#### 1. Crie o arquivo crie um ambiente virtual antes de baixar as dependencias do projeto, no terminal digite
+#### 1. Entre na pasta do projeto e  crie o arquivo de um ambiente virtual antes de baixar as dependencias do projeto, no terminal digite
 bash
+cd projeto-semana-ubiqua
 python -m venv env
 
 
 
 
-#### 1. Ainda no terminal, ative o ambiente virtual
+#### 2. Ainda no terminal, ative o ambiente virtual
 
 linux:
 
@@ -45,18 +46,18 @@ bash
 env\Scripts\activate
 
 
-#### 2. Baixe as dependencias do arquivo requirements.txt
+#### 3. Baixe as dependencias do arquivo requirements.txt
 bash
 pip install -r requirements.txt
 
 
-#### 3. Fazer as migrações do sistema
+#### 4. Fazer as migrações do sistema
 bash
 Python manage.py migrate
 
 
 
-#### 4. Crie um super usuario 
+#### 5. Crie um super usuario 
 bash
 python manage.py createsuperuser
 
@@ -66,7 +67,7 @@ irá pedir para criar: nome,email,senha
 lembre deles para fazer login na aplicação, e pode forçar a senha caso ela seja curta
 
 
-#### 5. Rodar o Sistema
+#### 6. Rodar o Sistema
 bash
 Python manage.py runserver
 
@@ -74,6 +75,6 @@ Python manage.py runserver
 
 
 
-#### 6. acesse o sistema pelo navegador
+#### 7. acesse o sistema pelo navegador
 bash
 http://localhost:8000
