@@ -13,7 +13,7 @@ Este projeto é um sistema desenvolvido em Django para realizar o cadastro e vis
 | Ambiente Local    | Porta padrão: 8000          |
 | Integrações       | Templates, API              |
 
-## ⚙ Configurações servdior
+## ⚙ Configurações servidor
 
 | Configuração      | Especificações              |
 |-------------------|-----------------------------|
