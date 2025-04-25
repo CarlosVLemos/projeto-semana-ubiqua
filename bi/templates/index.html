@@ -46,14 +46,6 @@
       </div>
     </div>
   </div>
-  <div class="row mb-4">
-    <div class="col-md-12">
-      <div class="card p-3 shadow-sm">
-        <h5 class="card-title text-center">Total Reciclado por Data</h5>
-        <canvas id="graficoTempo" width="400" height="200"></canvas>
-      </div>
-    </div>
-  </div>
 </div>
 
 <script>
@@ -144,36 +136,6 @@
         }
       }
     }
-  });
-
-  const ctx = document.getElementById('graficoTempo').getContext('2d');
-  const chart = new Chart(ctx, {
-      type: 'line',  // ou 'bar', 'doughnut', etc.
-      data: {
-          labels: JSON.parse('{{ labels_mes|escapejs }}'),  // Substitua pelos seus rótulos
-          datasets: [{
-              label: 'Total reciclado (Kg)',  // Nome do conjunto de dados
-              data: JSON.parse('{{ values_mes|escapejs }}'),  // Substitua pelos seus dados
-              borderColor: 'rgba(75, 192, 192, 1)',
-              backgroundColor: 'rgba(75, 192, 192, 0.2)',
-              fill: true,
-              tension: 0.1
-          }]
-      },
-      options: {
-          responsive: true,
-          scales: {
-              y: {
-                  beginAtZero: true
-              }
-          },
-          plugins: {
-              title: {
-                  display: true,
-                  text: 'Total reciclado ao longo do tempo'
-              }
-          }
-      }
   });
 </script>
 
