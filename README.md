@@ -2,7 +2,7 @@
 
 Este projeto é um sistema desenvolvido em Django para realizar o cadastro e visualização de dados via interface web e API.
 
-## ⚙ Configurações
+## ⚙ Configurações locais
 
 | Configuração      | Especificações              |
 |-------------------|-----------------------------|
@@ -12,6 +12,20 @@ Este projeto é um sistema desenvolvido em Django para realizar o cadastro e vis
 | Repositório       | Git                         |
 | Ambiente Local    | Porta padrão: 8000          |
 | Integrações       | Templates, API              |
+
+## ⚙ Configurações servdior
+
+| Configuração      | Especificações              |
+|-------------------|-----------------------------|
+| Linguagem         | Python                      |
+| Framework         | Django                      |
+| Banco de Dados    | MySQL                       |
+| Repositório       | Git                         |
+
+
+---
+
+
 
 ---
 
