@@ -8,7 +8,7 @@
     width: 100%;
     color: white;
   }
-
+  
   .botao:hover {
     background-image: linear-gradient(120deg, #619CFF,#896CFF, #B43AFF);
     color: rgb(255, 255, 255);
@@ -21,9 +21,160 @@
 {% endblock extra_head %}
 
 {% block content %}
-<div class="container-xxl flex-grow-1 container-p-y">
-  <div class="row">
-    <h1 class="text-center">Template</h1>
+<div class="container my-5"></div>
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card p-3 shadow-sm">
+        <h5 class="card-title text-center">Total Reciclado por Unidade</h5>
+        <canvas id="graficoUnidades" width="400" height="150"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card p-3 shadow-sm">
+        <h5 class="card-title text-center">Total Reciclado por Turma</h5>
+        <canvas id="graficoTurmas" width="400" height="150"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card p-3 shadow-sm">
+        <h5 class="card-title text-center">Total Reciclado por Tipo de Material</h5>
+        <canvas id="graficoTipos" width="400" height="150"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card p-3 shadow-sm">
+        <h5 class="card-title text-center">Total Reciclado por Data</h5>
+        <canvas id="graficoTempo" width="400" height="200"></canvas>
+      </div>
+    </div>
   </div>
 </div>
+
+<script>
+
+  const ctxUnidades = document.getElementById('graficoUnidades').getContext('2d');
+  const chartUnidades = new Chart(ctxUnidades, {
+    type: 'bar',
+    data: {
+      labels: JSON.parse('{{ labels|escapejs }}'),
+      datasets: [{
+        label: 'Total reciclado (Kg)',
+        data: JSON.parse('{{ values|escapejs }}'),
+        borderWidth: 1,
+        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+        borderColor: 'rgba(54, 162, 235, 1)'
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Total reciclado por unidade'
+        }
+      }
+    }
+  });
+  
+  const ctxTurmas = document.getElementById('graficoTurmas').getContext('2d');
+  const chartTurmas = new Chart(ctxTurmas, {
+    type: 'bar',
+    data: {
+      labels: JSON.parse('{{ labels_turma|escapejs }}'),
+      datasets: [{
+        label: 'Total reciclado (Kg)',
+        data: JSON.parse('{{ values_turma|escapejs }}'),
+        borderWidth: 1,
+        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+        borderColor: 'rgba(54, 162, 235, 1)'
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Total reciclado por turma'
+        }
+      }
+    }
+  });
+
+  const ctxTipos = document.getElementById('graficoTipos').getContext('2d');
+  const chartTipos = new Chart(ctxTipos, {
+    type: 'bar',
+    type: 'bar',
+    data: {
+      labels: JSON.parse('{{ labels_tipo|escapejs }}'),
+      datasets: [{
+        label: 'Total reciclado (Kg)',
+        data: JSON.parse('{{ values_tipo|escapejs }}'),
+        borderWidth: 1,
+        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+        borderColor: 'rgba(54, 162, 235, 1)'
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Total reciclado por tipo de material'
+        }
+      }
+    }
+  });
+
+  const ctx = document.getElementById('graficoTempo').getContext('2d');
+  const chart = new Chart(ctx, {
+      type: 'line',  // ou 'bar', 'doughnut', etc.
+      data: {
+          labels: JSON.parse('{{ labels_mes|escapejs }}'),  // Substitua pelos seus rótulos
+          datasets: [{
+              label: 'Total reciclado (Kg)',  // Nome do conjunto de dados
+              data: JSON.parse('{{ values_mes|escapejs }}'),  // Substitua pelos seus dados
+              borderColor: 'rgba(75, 192, 192, 1)',
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              fill: true,
+              tension: 0.1
+          }]
+      },
+      options: {
+          responsive: true,
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          },
+          plugins: {
+              title: {
+                  display: true,
+                  text: 'Total reciclado ao longo do tempo'
+              }
+          }
+      }
+  });
+</script>
+
 {% endblock %}
